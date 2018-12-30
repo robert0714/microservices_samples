@@ -1,0 +1,367 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>001-ptx</artifactId>
+	    <groupId>robert.sample</groupId>
+		<version>0.0.1-SNAPSHOT</version>  
+	</parent>
+	<artifactId>maas-ptx-service</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<maven.test.skip>false</maven.test.skip>
+		<spring-cloud.version>Edgware.SR5</spring-cloud.version>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyy-MM-dd-HH-mm</maven.build.timestamp.format>
+		<spring-boot-admin-starter-client.version>1.5.7</spring-boot-admin-starter-client.version>
+		<!-- windows要先安裝Docker-toolbox -->
+		<!-- https://download.docker.com/win/stable/DockerToolbox.exe -->
+		<!-- mvn docker:help -->
+		<!-- docker-machine rm default -->
+		<!-- docker-machine create \ -\ -virtualbox-memory 4096 default -->
+		<!-- eval $( docker-machine env default ) -->
+		<!-- mvn clean package docker:build -->
+		<!-- mvn docker:start -->
+		<!-- For Docker hub leave empty; use "localhost:5000/" for a local Docker 
+			Registry -->
+		<docker.registry.name></docker.registry.name>
+		<docker.repository.name>${docker.registry.name}robert0714/${project.artifactId}</docker.repository.name>
+		<docker.host.address>192.168.99.100</docker.host.address>
+		<docker.port>8080</docker.port>
+		<docker.version>${build.time}</docker.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>develop</groupId>
+			<artifactId>maas-ptx-api</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-data-mongodb</artifactId> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+			<version>${spring-boot-admin-starter-client.version}</version>
+		</dependency>
+
+
+		<!--Spring Data Redis dependencies -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.data</groupId> -->
+		<!-- <artifactId>spring-data-redis</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>redis.clients</groupId> -->
+		<!-- <artifactId>jedis</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.commons</groupId> -->
+		<!-- <artifactId>commons-pool2</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.cloud</groupId> -->
+		<!-- <artifactId>spring-cloud-security</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.security.oauth</groupId> -->
+		<!-- <artifactId>spring-security-oauth2</artifactId> -->
+		<!-- </dependency> -->
+
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.security</groupId> -->
+		<!-- <artifactId>spring-security-jwt</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.security</groupId> -->
+		<!-- <artifactId>spring-security-rsa</artifactId> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>net.sourceforge.htmlcleaner</groupId>
+			<artifactId>htmlcleaner</artifactId>
+			<version>2.22</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
+				 <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>timestamp-property</id>
+						<goals>
+							<goal>timestamp-property</goal>
+						</goals>
+						<configuration>
+							<name>build.time</name>
+							<!-- <pattern>yyyy-MM-dd-HH-mm</pattern> -->
+							<pattern>yyyy-MM-dd</pattern>
+							<locale>zh</locale>
+							<timeZone>GMT+8</timeZone>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.28.0</version>
+				<configuration>
+					<images>
+						<image>
+							<!-- <name>${docker.repository.name}:${timestamp}</name> -->
+							<name>${docker.repository.name}:${docker.version}</name>
+							<alias>${project.artifactId}</alias>
+							<build>
+								<from>library/openjdk:8u181-jdk</from>
+								<maintainer>robert0714</maintainer>
+								<assembly>
+									<descriptor>docker-assembly.xml</descriptor>
+								</assembly>
+								<ports>
+									<port>8080</port>
+								</ports>
+								<cmd>
+									<exec>
+										<arg>java</arg>
+										<arg>-jar</arg>
+										<arg>/maven/${project.build.finalName}.jar</arg>
+										<arg>--java.security.egd=file:/dev/./urandom </arg>
+									</exec>
+								</cmd>
+							</build>
+							<run>
+								<namingStrategy>alias</namingStrategy>
+								<ports>
+									<port>${docker.port}:8080</port>
+								</ports>
+								<volumes>
+									<bind>
+										<volume>${user.home}/logs:/root/logs:ro</volume>
+									</bind>
+								</volumes>
+								<log>
+									<prefix>${project.artifactId}</prefix>
+									<color>cyan</color>
+								</log>
+							</run>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>spring-releases</id>
+			<name>Spring Releases</name>
+			<url>https://repo.spring.io/libs-release</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-releases</id>
+			<name>Spring Releases</name>
+			<url>https://repo.spring.io/libs-release</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<profiles>
+		<profile>
+			<id>chain</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<docker.registry.name></docker.registry.name>
+				<docker.port>8080</docker.port>
+				<maas.filename>maas-ptx</maas.filename>
+				<docker.version>dev</docker.version>
+			</properties>
+		</profile>
+		<profile>
+			<activation>
+				<os>
+					<name>windows 10</name>
+					<family>windows</family>
+					<arch>amd64</arch>
+					<version>10.0</version>
+				</os>
+			</activation>
+			<properties>
+				<docker.registry.name></docker.registry.name>
+				<docker.port>8080</docker.port>
+				<maas.filename>maas-ptx</maas.filename>
+				<docker.version>dev</docker.version>
+				<docker.host.address>192.168.99.100</docker.host.address>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<version>0.28.0</version>
+						<configuration>
+							<machine>
+								<name>default</name>
+								<autoCreate>true</autoCreate>
+								<createOptions>
+									<driver>virtualbox</driver>
+									<virtualbox-cpu-count>2</virtualbox-cpu-count>
+								</createOptions>
+							</machine>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>iisi</id>
+			<properties>
+				<docker.registry.name>192.168.57.29:5000/</docker.registry.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<docker.registry.name></docker.registry.name>
+				<docker.port>8080</docker.port>
+				<maas.filename>maas-ptx-${build.time}</maas.filename>
+				<docker.version>dev</docker.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>lab</id>
+			<properties>
+				<docker.registry.name>172.21.3.105:5000/</docker.registry.name>
+				<docker.port>8080</docker.port>
+				<maas.filename>maas-ptx-${timestamp}</maas.filename>
+			</properties>
+		</profile>
+		<profile>
+			<id>staging</id>
+			<properties>
+				<docker.registry.name>172.21.1.63:5000/</docker.registry.name>
+				<docker.port>8080</docker.port>
+				<maas.filename>maas-ptx-${timestamp}</maas.filename>
+			</properties>
+		</profile>
+		<profile>
+			<id>production</id>
+			<properties>
+				<docker.registry.name>172.21.11.63:5000/</docker.registry.name>
+				<docker.port>8080</docker.port>
+				<maas.filename>maas-ptx-${timestamp}</maas.filename>
+			</properties>
+		</profile>
+		<profile>
+			<id>lab-docker</id>
+			<properties>
+				<docker.registry.name>172.21.3.105:5000/</docker.registry.name>
+				<docker.port>8080</docker.port>
+				<maas.filename>maas-ptx</maas.filename>
+			</properties>
+		</profile>
+		<profile>
+			<id>staging-docker</id>
+			<properties>
+				<docker.registry.name>172.21.1.63:5000/</docker.registry.name>
+				<docker.port>8080</docker.port>
+				<maas.filename>maas-ptx</maas.filename>
+			</properties>
+		</profile>
+		<profile>
+			<id>production-docker</id>
+			<properties>
+				<docker.registry.name>172.21.11.63:5000/</docker.registry.name>
+				<docker.port>8080</docker.port>
+				<maas.filename>maas-ptx</maas.filename>
+			</properties>
+		</profile>
+	</profiles>
+</project>

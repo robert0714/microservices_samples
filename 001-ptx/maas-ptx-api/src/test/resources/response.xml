@@ -1,0 +1,44 @@
+<ArrayOfBikeStation
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<BikeStation>
+		<StationUID>TPE0001</StationUID>
+		<StationID>0001</StationID>
+		<AuthorityID>TPE</AuthorityID>
+		<StationName>
+			<Zh_tw>捷運市政府站(3號出口)</Zh_tw>
+			<En>MRT Taipei City Hall Stataion(Exit 3)-2</En>
+		</StationName>
+		<StationPosition>
+			<PositionLat>25.0408578889</PositionLat>
+			<PositionLon>121.567904444</PositionLon>
+		</StationPosition>
+		<StationAddress>
+			<Zh_tw>忠孝東路/松仁路(東南側)</Zh_tw>
+			<En>The S.W. side of Road Zhongxiao East Road & Road Chung Yan.</En>
+		</StationAddress>
+		<BikesCapacity>180</BikesCapacity>
+		<SrcUpdateTime>2018-08-13T14:23:29+08:00</SrcUpdateTime>
+		<UpdateTime>2018-08-13T14:25:13+08:00</UpdateTime>
+	</BikeStation>
+	<BikeStation>
+		<StationUID>TPE0002</StationUID>
+		<StationID>0002</StationID>
+		<AuthorityID>TPE</AuthorityID>
+		<StationName>
+			<Zh_tw>捷運國父紀念館站(2號出口)</Zh_tw>
+			<En>MRT S.Y.S Memorial Hall Stataion(Exit 2.)</En>
+		</StationName>
+		<StationPosition>
+			<PositionLat>25.041254</PositionLat>
+			<PositionLon>121.55742</PositionLon>
+		</StationPosition>
+		<StationAddress>
+			<Zh_tw>忠孝東路四段/光復南路口(西南側)</Zh_tw>
+			<En>Sec,4. Zhongxiao E.Rd/GuangFu S. Rd</En>
+		</StationAddress>
+		<BikesCapacity>48</BikesCapacity>
+		<SrcUpdateTime>2018-08-13T14:23:31+08:00</SrcUpdateTime>
+		<UpdateTime>2018-08-13T14:25:13+08:00</UpdateTime>
+	</BikeStation>
+</ArrayOfBikeStation>

@@ -1,0 +1,105 @@
+*/taget/**
+*/**/target
+.project
+*/.project
+*/**/.project
+.settings
+*/.settings
+*/**/.settings
+.classpath
+*/.classpath
+*/**/.classpath
+*/.springBeans
+*/**/.springBeans
+/bin/
+*/mylog.log
+.idea/
+**/.iml
+*.iml
+*/**/mylog.log
+*/*/mylog.log
+/.project
+**/.classpath
+**/.project
+**/.settings/
+**/app.log
+**/target
+
+**/**/**/.classpath
+**/**/**/.project
+**/**/**/.settings/
+**/**/**/app.log
+**/**/**/target
+**/**/.vscode
+**/.vscode/
+.vscode/
+/.vscode/
+001-ptx/.vscode/settings.json
+
+
+.gitignore.swp
+.gradle/
+**/.gradle/
+**/**/.classpath
+**/**/.gradle/
+**/**/.idea/
+**/**/.project
+**/**/.settings/
+**/**/bin/
+**/**/target/
+
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+
+
+Chapter04/sample-spring-cloud-netflix-master/sample-client-service/.classpath
+Chapter04/sample-spring-cloud-netflix-master/sample-client-service/.project
+Chapter04/sample-spring-cloud-netflix-master/sample-client-service/.settings/org.eclipse.jdt.core.prefs
+

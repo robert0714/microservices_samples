@@ -1,0 +1,41 @@
+spring:
+  thymeleaf:
+    enabled: false     # Disable Thymeleaf
+  sleuth:
+    sampler:
+      percentage: 1
+  cloud:
+    config: 
+      enabled: false
+      discovery:
+        enabled: false
+    inetutils:
+      ignoredInterfaces:
+        - docker0
+        - veth.*
+        - enp0s3
+        - lo
+      preferredNetworks:
+        - 192.168.*.*
+        - 172.21.1.*
+  application:
+    name: ptx-service
+  profiles:
+    active:
+      default
+  hateoas: 
+    use-hal-as-default-json-media-type: false
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/ec
+management:
+  security:
+     enabled: false
+endpoints:
+  shutdown:
+    enabled: true
+    sensitive: false 
+hystrix:
+  metrics:
+    enabled: true
+    polling-interval-ms: 1000      
