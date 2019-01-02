@@ -20,9 +20,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding> 
 	</properties>
 	<modules>		
-		<module>maas-ptx-api</module>
-		<module>maas-ptx-service</module>
-		<module>maas-ptx-client</module>		
+		<module>ptx-api</module>
+		<module>ptx-service</module>
+		<module>ptx-client</module>		
 	</modules>
 
 

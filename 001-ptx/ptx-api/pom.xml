@@ -9,7 +9,7 @@
 	    <groupId>robert.sample</groupId>
 		<version>0.0.1-SNAPSHOT</version> 
 	</parent>
-	<artifactId>maas-ptx-api</artifactId>
+	<artifactId>ptx-api</artifactId>
 	<packaging>jar</packaging>
 
 	<properties>

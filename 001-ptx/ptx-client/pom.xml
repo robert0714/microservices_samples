@@ -5,11 +5,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>develop</groupId>
-		<artifactId>develop</artifactId>
+		<artifactId>001-ptx</artifactId>
+	    <groupId>robert.sample</groupId>
 		<version>0.0.1-SNAPSHOT</version> 
 	</parent>
-	<artifactId>maas-ptx-client</artifactId>
+	<artifactId>ptx-client</artifactId>
 	<packaging>jar</packaging>
 
 	<properties>
@@ -21,8 +21,8 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>develop</groupId>
-			<artifactId>maas-ptx-api</artifactId>
+			<groupId>robert.sample</groupId>
+			<artifactId>ptx-api</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
