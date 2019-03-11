@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment; 
 import org.springframework.test.context.junit4.SpringRunner; 
- 
+import org.springframework.http.MediaType; 
 
 import develop.ptx.TestApplication; 
 import develop.ptx.bike.model.ArrayOfBikeStation;
@@ -53,7 +53,7 @@ public class PtxBikeRestTemplateClientStubTest {
 	@ClassRule
 	public static HoverflyRule hoverflyRule = HoverflyRule.inSimulationMode(dsl(
 			service("ptx-service").andDelay(200, TimeUnit.MILLISECONDS).forAll().anyMethod(startsWith("/v1/ptx/bike/scope")).anyBody()
-					.willReturn(success(staticRepsonseContentJson, "application/json"))))
+					.willReturn(success(staticRepsonseContentJson, MediaType.APPLICATION_JSON_UTF8_VALUE))))
 			.printSimulationData();
 	
 	
